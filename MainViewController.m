@@ -12,6 +12,7 @@
 
 @property (nonatomic) int selectedImageIndex;
 @property (nonatomic) int topZlayerIndex;
+@property (nonatomic) int addedImageIndex;
 @property (weak, nonatomic) UIImageView *justAddedImage;
 
 @end
@@ -35,6 +36,7 @@
     // View & property setup
     self.navigationController.navigationBar.hidden = YES;
     self.topZlayerIndex = 999;
+    self.addedImageIndex = 1;
     
     // Add images
     UIImageView *imageView01 = [[UIImageView alloc] initWithFrame:CGRectMake(8,514,48,48)];
@@ -73,6 +75,41 @@
     [imageView04 addGestureRecognizer:panGestureRecognizer04];
     [imageView05 addGestureRecognizer:panGestureRecognizer05];
     
+    UITapGestureRecognizer *doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onDoubleTapBackground:)];
+    [self.view addGestureRecognizer:doubleTapGestureRecognizer];
+    doubleTapGestureRecognizer.numberOfTapsRequired = 3;
+    
+}
+
+- (void)onDoubleTapBackground:(UITapGestureRecognizer *)doubleTapGestureRecognizer {
+    for (UIView *subview in [self.view subviews]) {
+        if ((subview.tag <= self.addedImageIndex) && (subview.tag > 0)) {
+            
+            [UIView animateWithDuration:0.1
+                             animations:^{
+                                 subview.center = CGPointMake(subview.center.x - 10, subview.center.y);
+                             } completion:^(BOOL finished) {
+                                 [UIView animateWithDuration:2.0
+                                                  animations:^{
+                                                      subview.center = CGPointMake(subview.center.x + (arc4random() %(10)) * 100 + 320, subview.center.y);
+                                                  } completion:^(BOOL finished) {
+                                                      [subview removeFromSuperview];
+                                                  }];
+                             }];
+        } else if (subview.tag < 0) {
+            [UIView animateWithDuration:0.1
+                             animations:^{
+                                 subview.center = CGPointMake(subview.center.x + 10, subview.center.y);
+                             } completion:^(BOOL finished) {
+                                 [UIView animateWithDuration:2.0
+                                                  animations:^{
+                                                      subview.center = CGPointMake((subview.center.x + (arc4random() %(10)) * 100 + 320) * -1, subview.center.y);
+                                                  } completion:^(BOOL finished) {
+                                                      [subview removeFromSuperview];
+                                                  }];
+                             }];
+        }
+    }
 }
 
 - (void)onPanImage01:(UIPanGestureRecognizer *)panGestureRecognizer {
@@ -165,6 +202,8 @@
         newImage.image = [UIImage imageNamed:(@"character_05")];
     }
     
+    newImage.tag = self.addedImageIndex;
+    self.addedImageIndex++;
     [self.view addSubview:newImage];
     return newImage;
 }
@@ -213,14 +252,20 @@
 //                     } completion:^(BOOL finished) {
 //                         [doubleTapGestureRecogenizer.view removeFromSuperview];
 //                     }];
+    int travelDirection = 1;
+    if (doubleTapGestureRecogenizer.view.tag > 0) {
+        travelDirection = 1;
+    } else if (doubleTapGestureRecogenizer.view.tag < 0) {
+        travelDirection = -1;
+    }
     
     [UIView animateWithDuration:0.1
                      animations:^{
-                         doubleTapGestureRecogenizer.view.center = CGPointMake(doubleTapGestureRecogenizer.view.center.x - 10, doubleTapGestureRecogenizer.view.center.y);
+                         doubleTapGestureRecogenizer.view.center = CGPointMake(doubleTapGestureRecogenizer.view.center.x - (10 * travelDirection), doubleTapGestureRecogenizer.view.center.y);
                      } completion:^(BOOL finished) {
                          [UIView animateWithDuration:0.6
                                           animations:^{
-                                              doubleTapGestureRecogenizer.view.center = CGPointMake(doubleTapGestureRecogenizer.view.center.x + 420, doubleTapGestureRecogenizer.view.center.y);
+                                              doubleTapGestureRecogenizer.view.center = CGPointMake(doubleTapGestureRecogenizer.view.center.x + (420 * travelDirection), doubleTapGestureRecogenizer.view.center.y);
                                           } completion:^(BOOL finished) {
                                               [doubleTapGestureRecogenizer.view removeFromSuperview];
                                           }];
@@ -232,6 +277,7 @@
 - (void)onLongPressInstance:(UILongPressGestureRecognizer *)longPressGestureRecogenizer {
     if (longPressGestureRecogenizer.state == UIGestureRecognizerStateBegan) {
         longPressGestureRecogenizer.view.transform = CGAffineTransformScale(longPressGestureRecogenizer.view.transform, -1, 1);
+        longPressGestureRecogenizer.view.tag = longPressGestureRecogenizer.view.tag * -1;
     }
 }
 
