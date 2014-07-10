@@ -19,6 +19,8 @@
 		6AF7E8C9196C66CA00673901 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AF7E8B1196C66CA00673901 /* UIKit.framework */; };
 		6AF7E8D1196C66CA00673901 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AF7E8CF196C66CA00673901 /* InfoPlist.strings */; };
 		6AF7E8D3196C66CA00673901 /* gestureTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7E8D2196C66CA00673901 /* gestureTests.m */; };
+		6AF7E8DF196C66D800673901 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7E8DD196C66D800673901 /* MainViewController.m */; };
+		6AF7E8E0196C66D800673901 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AF7E8DE196C66D800673901 /* MainViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,9 @@
 		6AF7E8CE196C66CA00673901 /* gestureTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gestureTests-Info.plist"; sourceTree = "<group>"; };
 		6AF7E8D0196C66CA00673901 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6AF7E8D2196C66CA00673901 /* gestureTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gestureTests.m; sourceTree = "<group>"; };
+		6AF7E8DC196C66D800673901 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		6AF7E8DD196C66D800673901 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		6AF7E8DE196C66D800673901 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,9 @@
 		6AF7E8A1196C66CA00673901 = {
 			isa = PBXGroup;
 			children = (
+				6AF7E8DC196C66D800673901 /* MainViewController.h */,
+				6AF7E8DD196C66D800673901 /* MainViewController.m */,
+				6AF7E8DE196C66D800673901 /* MainViewController.xib */,
 				6AF7E8B3196C66CA00673901 /* gesture */,
 				6AF7E8CC196C66CA00673901 /* gestureTests */,
 				6AF7E8AC196C66CA00673901 /* Frameworks */,
@@ -220,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AF7E8B8196C66CA00673901 /* InfoPlist.strings in Resources */,
+				6AF7E8E0196C66D800673901 /* MainViewController.xib in Resources */,
 				6AF7E8C0196C66CA00673901 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AF7E8BE196C66CA00673901 /* AppDelegate.m in Sources */,
+				6AF7E8DF196C66D800673901 /* MainViewController.m in Sources */,
 				6AF7E8BA196C66CA00673901 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
